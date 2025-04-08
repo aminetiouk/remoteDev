@@ -2,7 +2,16 @@ import { useEffect, useState } from 'react';
 import Background from './Background';
 import Container from './Container';
 import Footer from './Footer';
-import Header from './Header';
+import Header, { HeaderTop } from './Header';
+import Sidebar, { SidebarTop } from './Sidebar';
+import JobItemContent from './JobItemContent';
+import BookmarksButton from './BookmarksButton';
+import Logo from './Logo';
+import SearchForm from './SearchForm';
+import JobList from './JobList';
+import PaginationControls from './PaginationControls';
+import ResultsCount from './ResultsCount';
+import SortingControls from './SortingControls';
 
 function App() {
   const [searchText, setSearchText] = useState('');
@@ -15,7 +24,7 @@ function App() {
         `https://bytegrad.com/course-assets/projects/rmtdev/api/data?search=${searchText}`
       );
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       setJobItems(data.jobItems);
     };
     fetchData();
@@ -24,9 +33,27 @@ function App() {
     <>
       <Background />
 
-      <Header searchText={searchText} setSearchText={setSearchText} />
+      <Header>
+        <HeaderTop>
+          <Logo />
+          <BookmarksButton />
+        </HeaderTop>
 
-      <Container jobItems={jobItems} />
+        <SearchForm searchText={searchText} setSearchText={setSearchText} />
+      </Header>
+
+      <Container>
+        <Sidebar>
+          <SidebarTop>
+            <ResultsCount />
+            <SortingControls />
+          </SidebarTop>
+
+          <JobList jobItems={jobItems} />
+          <PaginationControls />
+        </Sidebar>
+        <JobItemContent />
+      </Container>
 
       <Footer />
     </>
