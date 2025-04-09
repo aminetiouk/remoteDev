@@ -1,9 +1,9 @@
-import { jobItem } from '../lib/types';
+import { JobItem } from '../lib/types';
 import JobListItem from './JobListItem';
 import Spinner from './Spinner';
 
 type TJobItemsProps = {
-  jobItems: jobItem[];
+  jobItems: JobItem[];
   isLoading: boolean;
 }
 
