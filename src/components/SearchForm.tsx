@@ -1,4 +1,9 @@
-export default function SearchForm({searchText ,setSearchText}) {
+type TSearchFormProps = {
+  searchText: string;
+  setSearchText: (text: string) => void;
+};
+
+export default function SearchForm({searchText ,setSearchText}: TSearchFormProps) {
   return (
     <form onSubmit={e => e.preventDefault()} action="#" className="search">
       <button type="submit">
