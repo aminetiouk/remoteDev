@@ -16,7 +16,7 @@ import { useJobItems } from '../lib/hooks';
 
 function App() {
   const [searchText, setSearchText] = useState('');
-  const {jobItems, isLoading} = useJobItems(searchText);
+  const {sliceJobItems, isLoading} = useJobItems(searchText);
   return (
     <>
       <Background />
@@ -37,7 +37,7 @@ function App() {
             <SortingControls />
           </SidebarTop>
 
-          <JobList jobItems={jobItems} isLoading={isLoading} />
+          <JobList jobItems={sliceJobItems} isLoading={isLoading} />
           <PaginationControls />
         </Sidebar>
         <JobItemContent />
