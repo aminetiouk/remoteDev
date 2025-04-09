@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import { JobItem } from './types';
 
-export function useJobItems(searchText: string) {
+export function useJobItems(searchText: string): [JobItem[], boolean] {
   const [jobItems, setJobItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,5 +21,5 @@ export function useJobItems(searchText: string) {
     fetchData();
   }, [searchText]);
 
-  return { sliceJobItems, isLoading };
+  return [sliceJobItems, isLoading];
 }
