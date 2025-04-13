@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { JobItem, JobItemExtend } from './types';
+import { JobItemExtend } from './types';
 import { BASE_API_URL } from './constants';
 
 export function useActiveId() {
@@ -43,10 +43,11 @@ export function useJobItem(id: number | null) {
   return [jobItem, isLoading] as const;
 }
 
-export function useJobItems(searchText: string): [JobItem[], boolean] {
+export function useJobItems(searchText: string) {
   const [jobItems, setJobItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const totalNumberOfResult = jobItems.length;
   const sliceJobItems = jobItems.slice(0, 7);
 
   useEffect(() => {
@@ -61,5 +62,5 @@ export function useJobItems(searchText: string): [JobItem[], boolean] {
     fetchData();
   }, [searchText]);
 
-  return [sliceJobItems, isLoading];
+  return [sliceJobItems, isLoading, totalNumberOfResult] as const;
 }
