@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { JobItem, JobItemExtend } from './types';
 import { BASE_API_URL } from './constants';
 import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 type JobItemApiResponse = {
   public: boolean;
@@ -41,28 +42,39 @@ type JobItemsApiResponse = {
   public: boolean;
   sorted: boolean;
   jobItems: JobItem[];
-}
+};
 
-const fetchDataJobItems = async (searchText: string): Promise<JobItemsApiResponse> => {
+const fetchDataJobItems = async (
+  searchText: string
+): Promise<JobItemsApiResponse> => {
   const response = await fetch(`${BASE_API_URL}?search=${searchText}`);
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.description);
+  }
   const data = await response.json();
   return data;
 };
 
 export function useJobItems(searchText: string) {
-  const { data, isInitialLoading } = useQuery(['job-items', searchText], () => 
-    fetchDataJobItems(searchText),
-  {
-    staleTime: 1000 * 60 * 60,
+  const { data, isInitialLoading } = useQuery(
+    ['job-items', searchText],
+    () => fetchDataJobItems(searchText),
+    {
+      staleTime: 1000 * 60 * 60,
       refetchOnWindowFocus: false,
       retry: false,
       enabled: Boolean(searchText),
       onError: error => {
-        console.error('Job item fetch failed: ', error);
+        if (error instanceof Error) {
+          toast.error(error.message);
+        } else {
+          toast.error('An unknown error occurred');
+        }
       }
-  }
-);
-const jobItems = data?.jobItems ?? [];
+    }
+  );
+  const jobItems = data?.jobItems ?? [];
   const isLoading = isInitialLoading;
   return { jobItems, isLoading } as const;
 }
