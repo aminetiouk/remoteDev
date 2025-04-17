@@ -53,7 +53,7 @@ function App() {
         <Sidebar>
           <SidebarTop>
             <ResultsCount totalNumberOfResult={totalNumberOfResult} />
-            <SortingControls onClick={handleChangeSortBy} />
+            <SortingControls sortBy={sortBy} onClick={handleChangeSortBy} />
           </SidebarTop>
 
           <JobList jobItems={jobItemsSliced} isLoading={isLoading} />
