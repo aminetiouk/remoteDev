@@ -19,11 +19,10 @@ function App() {
   const [searchText, setSearchText] = useState('');
   const debounceSearchText = useDebounce(searchText, 250);
   const { jobItems, isLoading } = useJobItems(debounceSearchText);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const totalNumberOfResult = jobItems?.length;
-  const jobItemsSliced = jobItems?.slice(0, 7);
-
-  const [currentPage, setCurrentPage] = useState(1);
+  const jobItemsSliced = jobItems?.slice(currentPage * 7 - 7, currentPage * 7);
 
   const handleChangePage = (direction: 'next' | 'previous') => {
     if (direction === 'next') {
@@ -53,7 +52,10 @@ function App() {
           </SidebarTop>
 
           <JobList jobItems={jobItemsSliced} isLoading={isLoading} />
-          <PaginationControls  currentPage={currentPage} onClick={handleChangePage} />
+          <PaginationControls
+            currentPage={currentPage}
+            onClick={handleChangePage}
+          />
         </Sidebar>
         <JobItemContent />
       </Container>
