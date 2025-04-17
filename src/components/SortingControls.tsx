@@ -1,13 +1,13 @@
-export default function SortingControls() {
+export default function SortingControls({onClick}) {
   return (
     <section className="sorting">
       <i className="fa-solid fa-arrow-down-short-wide"></i>
 
-      <button className="sorting__button sorting__button--relevant">
+      <button onClick={() => onClick("relevant")} className="sorting__button sorting__button--relevant">
         Relevant
       </button>
 
-      <button className="sorting__button sorting__button--recent">
+      <button onClick={() => onClick("recent")} className="sorting__button sorting__button--recent">
         Recent
       </button>
     </section>
