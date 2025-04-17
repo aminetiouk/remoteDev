@@ -55,6 +55,7 @@ function App() {
           <PaginationControls
             currentPage={currentPage}
             onClick={handleChangePage}
+            totalNumberOfResult={totalNumberOfResult}
           />
         </Sidebar>
         <JobItemContent />
