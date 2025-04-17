@@ -18,4 +18,6 @@ export type JobItemExtend = JobItem & {
   relevanceScore: number;
   coverImgURL: string;
   companyURL: string;
-}
+};
+
+export type sortBy = 'relevant' | 'recent';
