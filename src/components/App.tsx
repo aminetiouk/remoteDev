@@ -20,6 +20,7 @@ function App() {
   const debounceSearchText = useDebounce(searchText, 250);
   const { jobItems, isLoading } = useJobItems(debounceSearchText);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState("relevant");
 
   const totalNumberOfResult = jobItems?.length;
   const jobItemsSliced = jobItems?.slice(currentPage * 7 - 7, currentPage * 7);
@@ -31,6 +32,10 @@ function App() {
       setCurrentPage(prev => prev - 1);
     }
   };
+
+  const handleChangeSortBy = (newSortBy) => {
+    setSortBy(newSortBy);
+  }
   return (
     <>
       <Background />
@@ -48,7 +53,7 @@ function App() {
         <Sidebar>
           <SidebarTop>
             <ResultsCount totalNumberOfResult={totalNumberOfResult} />
-            <SortingControls />
+            <SortingControls onClick={handleChangeSortBy} />
           </SidebarTop>
 
           <JobList jobItems={jobItemsSliced} isLoading={isLoading} />
