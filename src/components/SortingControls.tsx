@@ -1,4 +1,11 @@
-export default function SortingControls({ sortBy, onClick }) {
+import { sortBy } from "../lib/types";
+
+type SortingControlsProps = {
+  sortBy: sortBy;
+  onClick: (newSortBy: sortBy) => void;
+}
+
+export default function SortingControls({ sortBy, onClick }: SortingControlsProps) {
   return (
     <section className="sorting">
       <i className="fa-solid fa-arrow-down-short-wide"></i>
