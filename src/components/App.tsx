@@ -23,16 +23,6 @@ function App() {
   const { jobItems, isLoading } = useJobItems(debounceSearchText);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<sortBy>('relevant');
-  const [bookmarkedIds, setBookmarkedIds] = useState<number[]>([]);
-
-  const handleToogleBookmark = (id: number) => {
-    if (bookmarkedIds.includes(id)) {
-      setBookmarkedIds((prev) => prev.filter((item) => item !== id));
-    } else {
-      setBookmarkedIds((prev) => [...prev, id]);
-    }
-  };
-
 
   const jobItemsSorted = [...(jobItems || [])].sort((a, b) => {
     if (sortBy === 'relevant') {
