@@ -27,7 +27,7 @@ export function useJobItem(id: number | null) {
       refetchOnWindowFocus: false,
       retry: false,
       enabled: Boolean(id),
-      onError: handleError,
+      onError: handleError
     }
   );
 
@@ -63,7 +63,7 @@ export function useJobItems(searchText: string) {
       refetchOnWindowFocus: false,
       retry: false,
       enabled: Boolean(searchText),
-      onError: handleError,
+      onError: handleError
     }
   );
   const jobItems = data?.jobItems ?? [];
@@ -103,14 +103,17 @@ export function useDebounce<T>(value: T, delay = 500): T {
   return debounceValue;
 }
 
-export function useLocalStorage(key: string, initialValue) {
-  const [value, setValue] = useState(() =>
+export function useLocalStorage<T>(
+  key: string,
+  initialValue: T
+): [T, React.Dispatch<React.SetStateAction<T>>] {
+  const [value, setValue] = useState<T>(() =>
     JSON.parse(localStorage.getItem(key) || JSON.stringify(initialValue))
   );
 
   useEffect(() => {
-      localStorage.setItem(key, JSON.stringify(value));
-    }, [value, key]);
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [value, key]);
 
-  return [value, setValue] as const;
+  return [value, setValue];
 }
