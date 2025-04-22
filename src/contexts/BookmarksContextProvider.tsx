@@ -8,13 +8,11 @@ type BookmarksContext = {
 
 type Props = {
   children: React.ReactNode;
-}
+};
 
 export const BookmarksContext = createContext<BookmarksContext | null>(null);
 
-export default function BookmarksContextProvider({
-  children
-}: Props) {
+export default function BookmarksContextProvider({ children }: Props) {
   const [bookmarkedIds, setBookmarkedIds] = useLocalStorage<number[]>(
     'bookmarkedIds',
     []
