@@ -167,3 +167,13 @@ export function useOnClickOutside(
     };
   }, [refs, handler]);
 }
+
+export function useActiveIdContext() {
+  const context = useContext(useActiveIdContext);
+  if (!context) {
+    throw new Error(
+      'useActiveIdContext must be used within a useActiveIdContextProvider'
+    );
+  }
+  return context;
+}
