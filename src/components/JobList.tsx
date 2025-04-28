@@ -9,7 +9,7 @@ type TJobItemsProps = {
 };
 
 export function JobList({ jobItems, isLoading }: TJobItemsProps) {
-  const activeId = useActiveIdContext();
+  const { activeId } = useActiveIdContext();
   return (
     <ul className="job-list">
       {isLoading && <Spinner />}
