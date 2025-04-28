@@ -18,6 +18,7 @@ import { sortBy } from '../lib/types';
 import { RESULT_PER_PAGE } from '../lib/constants';
 
 function App() {
+
   const { jobItems, isLoading } = useSearchQuery(debounceSearchText);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<sortBy>('relevant');
@@ -58,7 +59,7 @@ function App() {
           <BookmarksButton />
         </HeaderTop>
 
-        <SearchForm searchText={searchText} setSearchText={setSearchText} />
+        <SearchForm />
       </Header>
 
       <Container>
