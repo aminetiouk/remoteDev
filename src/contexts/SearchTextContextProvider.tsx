@@ -2,7 +2,9 @@ import { createContext, useState } from 'react';
 import { useDebounce } from '../lib/hooks';
 
 type SearchTextContext = {
-  activeId: number | null;
+  searchText: string;
+  debounceSearchText: string;
+  handleChangeSearchText: (newSearchText: string) => void;
 };
 
 type Props = {
@@ -14,10 +16,15 @@ export const SearchTextContext = createContext<SearchTextContext | null>(null);
 export default function SearchTextContextProvider({ children }: Props) {
   const [searchText, setSearchText] = useState('');
   const debounceSearchText = useDebounce(searchText, 250);
+  const handleChangeSearchText = (newSearchText: string) => {
+    setSearchText(newSearchText);
+  };
   return (
     <SearchTextContext.Provider
       value={{
-        activeId
+        searchText,
+        debounceSearchText,
+        handleChangeSearchText
       }}
     >
       {children}
