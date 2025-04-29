@@ -1,9 +1,9 @@
 import React from 'react';
-import { sortBy } from '../lib/types';
+import { SortBy } from '../lib/types';
 
 type SortingControlsProps = {
-  sortBy: sortBy;
-  onClick: (newSortBy: sortBy) => void;
+  sortBy: SortBy;
+  onClick: (newSortBy: SortBy) => void;
 };
 
 export default function SortingControls({
