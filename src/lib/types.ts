@@ -20,4 +20,4 @@ export type JobItemExtend = JobItem & {
   companyURL: string;
 };
 
-export type sortBy = 'relevant' | 'recent';
+export type SortBy = 'relevant' | 'recent';
