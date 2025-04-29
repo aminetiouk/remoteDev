@@ -7,11 +7,11 @@ import JobItemContent from './JobItemContent';
 import BookmarksButton from './BookmarksButton';
 import Logo from './Logo';
 import SearchForm from './SearchForm';
-import JobList from './JobList';
 import PaginationControls from './PaginationControls';
 import ResultsCount from './ResultsCount';
 import SortingControls from './SortingControls';
 import { Toaster } from 'react-hot-toast';
+import JobListSearch from './JobListSearch';
 
 function App() {
   return (
@@ -34,7 +34,7 @@ function App() {
             <SortingControls />
           </SidebarTop>
 
-          <JobList />
+          <JobListSearch />
           <PaginationControls />
         </Sidebar>
         <JobItemContent />
